@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MedFormPro.Web.Data;
 using Microsoft.AspNetCore.DataProtection;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.DataProtection.StackExchangeRedis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,7 @@ if (string.IsNullOrEmpty(connectionString))
 }
 
 // Convert Heroku PostgreSQL URL to connection string if needed
-if (connectionString.StartsWith("postgres://"))
+if (connectionString?.StartsWith("postgres://") == true)
 {
     try
     {
@@ -59,13 +60,13 @@ if (connectionString.StartsWith("postgres://"))
 // Configure DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    if (connectionString.Contains("postgres"))
+    if (connectionString?.Contains("postgres") == true)
     {
         options.UseNpgsql(connectionString);
     }
     else
     {
-        options.UseSqlite(connectionString);
+        options.UseSqlite(connectionString ?? "Data Source=MedFormPro.db");
     }
 });
 

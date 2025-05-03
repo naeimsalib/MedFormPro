@@ -1,0 +1,7 @@
+build:
+  config:
+    DOTNET_SDK_VERSION: "6.0.100"
+  packages:
+    - dotnet-sdk-6.0
+run:
+  web: cd MedFormPro.Web && dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT 

@@ -1,0 +1,68 @@
+@model IEnumerable<MedFormPro.Web.Models.Guide>
+
+@{
+    ViewData["Title"] = "Application Guide";
+}
+
+<div class="container mt-4">
+    <h1>MedForm Pro Guide</h1>
+    <p class="lead">Welcome to the comprehensive guide for MedForm Pro. Select a category to learn more.</p>
+
+    <div class="row mt-4">
+        @{
+                var categories = Model.Select(g => g.Category).Distinct();
+                foreach (var category in categories)
+                {
+                        var categoryGuides = Model.Where(g => g.Category == category);
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">@category</h5>
+                                    <ul class="list-unstyled">
+                                        @foreach (var guide in categoryGuides)
+                                        {
+                                                <li class="mb-2">
+                                                    <i class="@(string.IsNullOrEmpty(guide.Icon) ? "fas fa-book" : guide.Icon)"></i>
+                                                    <a href="#" class="guide-link" data-guide-id="@guide.Id">@guide.Title</a>
+                                                </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                }
+        }
+    </div>
+</div>
+
+<!-- Guide Modal -->
+<div class="modal fade" id="guideModal" tabindex="-1" aria-labelledby="guideModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="guideModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="guideContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.guide-link').click(function (e) {
+                    e.preventDefault();
+                    var guideId = $(this).data('guide-id');
+
+                    $.get('/Guide/GetGuideContent/' + guideId, function (data) {
+                        $('#guideModalLabel').text(data.title);
+                        $('#guideContent').html(data.content);
+                        $('#guideModal').modal('show');
+                    });
+                });
+            });
+        </script>
+}

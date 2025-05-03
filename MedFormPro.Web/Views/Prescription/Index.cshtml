@@ -1,0 +1,86 @@
+@model IEnumerable<MedFormPro.Web.Models.PrescriptionDetailsViewModel>
+
+@{
+    ViewData["Title"] = "Prescriptions";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Prescriptions</h1>
+        @if (User.IsInRole("Pharmacist"))
+        {
+            <a asp-action="Create" class="btn btn-primary">Create New Prescription</a>
+        }
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.PatientName)</th>
+                    <th>@Html.DisplayNameFor(model => model.MedicationName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Dosage)</th>
+                    <th>@Html.DisplayNameFor(model => model.Status)</th>
+                    <th>@Html.DisplayNameFor(model => model.ShipmentStatus)</th>
+                    <th>Created Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PatientName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MedicationName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Dosage)</td>
+                        <td>
+                            <span class="badge bg-@(item.Status == PrescriptionStatus.Approved ? "success" : 
+                                                        item.Status == PrescriptionStatus.Denied ? "danger" : "warning")">
+                            @item.Status
+                        </span>
+                    </td>
+                    <td>
+                        <span
+                            class="badge bg-@(item.ShipmentStatus == ShipmentStatus.Delivered ? "success" :
+                                                                                                                                                                                                item.ShipmentStatus == ShipmentStatus.Backorder ? "danger" : "info")">
+                            @item.ShipmentStatus
+                        </span>
+                    </td>
+                    <td>@item.CreatedDate.ToString("g")</td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-info-circle"></i> Details
+                            </a>
+                            @if (User.IsInRole("ReviewTeam") && item.Status == PrescriptionStatus.Submitted)
+                                {
+                                    <a asp-action="Review" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">
+                                        <i class="bi bi-clipboard-check"></i> Review
+                                    </a>
+                                }
+                                @if (User.IsInRole("DeliveryTeam") && item.Status == PrescriptionStatus.Approved)
+                                {
+                                    <a asp-action="UpdateShipment" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">
+                                        <i class="bi bi-truck"></i> Update Shipment
+                                    </a>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+}

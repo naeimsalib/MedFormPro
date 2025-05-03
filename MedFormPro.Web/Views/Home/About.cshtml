@@ -1,0 +1,331 @@
+@{
+    ViewData["Title"] = "About MedForm Pro";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">About MedForm Pro</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Navigation sidebar -->
+            <div class="list-group mb-4 sticky-top" style="top: 2rem;">
+                <a href="#overview" class="list-group-item list-group-item-action">Overview</a>
+                <a href="#technologies" class="list-group-item list-group-item-action">Technologies</a>
+                <a href="#roles" class="list-group-item list-group-item-action">User Roles</a>
+                <a href="#workflows" class="list-group-item list-group-item-action">Workflows</a>
+                <a href="#security" class="list-group-item list-group-item-action">Security</a>
+                <a href="#database" class="list-group-item list-group-item-action">Database Structure</a>
+                <a href="#features" class="list-group-item list-group-item-action">Key Features</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <!-- Overview Section -->
+            <section id="overview" class="mb-5">
+                <h2>System Overview</h2>
+                <p>MedForm Pro is a comprehensive prescription management system designed to streamline the entire
+                    prescription lifecycle. From initial creation by pharmacists to final delivery confirmation, our
+                    system ensures accurate tracking and efficient processing of all prescriptions.</p>
+                <div class="alert alert-info">
+                    <strong>Current Version:</strong> 1.0.0<br>
+                    <strong>Release Date:</strong> May 2024
+                </div>
+            </section>
+
+            <!-- Technologies Section -->
+            <section id="technologies" class="mb-5">
+                <h2>Technologies Used</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Backend Framework</h5>
+                        <ul>
+                            <li>ASP.NET Core MVC 6.0</li>
+                            <li>Entity Framework Core 6.0</li>
+                            <li>SQLite Database</li>
+                        </ul>
+
+                        <h5>Frontend Technologies</h5>
+                        <ul>
+                            <li>Bootstrap 5</li>
+                            <li>jQuery</li>
+                            <li>HTML5/CSS3</li>
+                        </ul>
+
+                        <h5>Security</h5>
+                        <ul>
+                            <li>ASP.NET Core Identity</li>
+                            <li>Role-based Authorization</li>
+                            <li>Password Hashing</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roles Section -->
+            <section id="roles" class="mb-5">
+                <h2>User Roles</h2>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white">
+                        Administrator
+                    </div>
+                    <div class="card-body">
+                        <h5>Responsibilities:</h5>
+                        <ul>
+                            <li>User account management</li>
+                            <li>Role assignment</li>
+                            <li>System-wide prescription monitoring</li>
+                            <li>Access to all system features</li>
+                        </ul>
+                        <p><strong>Default Admin Account:</strong> admin@medformpro.com</p>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-success text-white">
+                        Pharmacist
+                    </div>
+                    <div class="card-body">
+                        <h5>Capabilities:</h5>
+                        <ul>
+                            <li>Create new prescriptions</li>
+                            <li>View own prescription history</li>
+                            <li>Track prescription status</li>
+                            <li>Monitor delivery progress</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-info text-white">
+                        Review Team
+                    </div>
+                    <div class="card-body">
+                        <h5>Responsibilities:</h5>
+                        <ul>
+                            <li>Review submitted prescriptions</li>
+                            <li>Approve or deny prescriptions</li>
+                            <li>Provide review notes</li>
+                            <li>Track review history</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        Delivery Team
+                    </div>
+                    <div class="card-body">
+                        <h5>Capabilities:</h5>
+                        <ul>
+                            <li>Manage approved prescriptions</li>
+                            <li>Update shipment status</li>
+                            <li>Track delivery progress</li>
+                            <li>Confirm deliveries</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workflows Section -->
+            <section id="workflows" class="mb-5">
+                <h2>System Workflows</h2>
+
+                <div class="accordion" id="workflowAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#prescriptionCreation">
+                                Prescription Creation Workflow
+                            </button>
+                        </h2>
+                        <div id="prescriptionCreation" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <ol>
+                                    <li>Pharmacist logs into the system</li>
+                                    <li>Creates new prescription with patient details</li>
+                                    <li>Submits for review</li>
+                                    <li>System marks prescription as "Submitted"</li>
+                                    <li>Review team notified of new submission</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#reviewProcess">
+                                Review Process
+                            </button>
+                        </h2>
+                        <div id="reviewProcess" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <ol>
+                                    <li>Review team member accesses submitted prescriptions</li>
+                                    <li>Reviews prescription details</li>
+                                    <li>Makes approval decision</li>
+                                    <li>Adds review notes</li>
+                                    <li>System updates prescription status</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#deliveryProcess">
+                                Delivery Process
+                            </button>
+                        </h2>
+                        <div id="deliveryProcess" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <ol>
+                                    <li>Delivery team views approved prescriptions</li>
+                                    <li>Updates shipment status as needed</li>
+                                    <li>Tracks delivery progress</li>
+                                    <li>Confirms successful delivery</li>
+                                    <li>System maintains delivery record</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section id="security" class="mb-5">
+                <h2>Security Features</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                Authentication
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Secure password hashing</li>
+                                    <li>Session management</li>
+                                    <li>Login attempt monitoring</li>
+                                    <li>Secure cookie handling</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                Authorization
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Role-based access control</li>
+                                    <li>Action-level permissions</li>
+                                    <li>View-level restrictions</li>
+                                    <li>Data access filtering</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Database Section -->
+            <section id="database" class="mb-5">
+                <h2>Database Structure</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Table</th>
+                                <th>Key Fields</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Users</td>
+                                <td>Id, Username, Email, Role</td>
+                                <td>Stores user account information and roles</td>
+                            </tr>
+                            <tr>
+                                <td>Prescriptions</td>
+                                <td>Id, PatientName, Status, ShipmentStatus</td>
+                                <td>Maintains prescription records and their current status</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="mb-5">
+                <h2>Key Features</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Real-time Tracking</h5>
+                                <p class="card-text">Monitor prescription status and location in real-time throughout
+                                    the entire process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Audit Trail</h5>
+                                <p class="card-text">Complete history of all actions taken on each prescription.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Role Management</h5>
+                                <p class="card-text">Flexible role-based access control system.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+        <script>
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Highlight active section in sidebar
+            window.addEventListener('scroll', function () {
+                const sections = document.querySelectorAll('section');
+                const navItems = document.querySelectorAll('.list-group-item');
+
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').substring(1) === current) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        </script>
+}

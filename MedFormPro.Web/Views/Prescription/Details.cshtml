@@ -1,0 +1,104 @@
+@model MedFormPro.Web.Models.PrescriptionDetailsViewModel
+
+@{
+    ViewData["Title"] = "Prescription Details";
+}
+
+<div class="container">
+    <h1>Prescription Details</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5 class="card-title">Patient Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Patient Name</dt>
+                        <dd class="col-sm-8">@Model.PatientName</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-title">Prescription Status</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Status</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.Status == PrescriptionStatus.Approved ? "success" : 
+                                                Model.Status == PrescriptionStatus.Denied ? "danger" : "warning")">
+                                @Model.Status
+                            </span>
+                        </dd>
+                        <dt class="col-sm-4">Shipment Status</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.ShipmentStatus == ShipmentStatus.Delivered ? "success" :
+                                                                                                                                                                                                Model.ShipmentStatus == ShipmentStatus.Backorder ? "danger" : "info")">
+                                @Model.ShipmentStatus
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <h5 class="card-title">Medication Details</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Medication</dt>
+                        <dd class="col-sm-8">@Model.MedicationName</dd>
+                        <dt class="col-sm-4">Dosage</dt>
+                        <dd class="col-sm-8">@Model.Dosage</dd>
+                        <dt class="col-sm-4">Instructions</dt>
+                        <dd class="col-sm-8">@Model.Instructions</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-title">Timeline</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Created By</dt>
+                        <dd class="col-sm-8">@Model.CreatedBy</dd>
+                        <dt class="col-sm-4">Created Date</dt>
+                        <dd class="col-sm-8">@Model.CreatedDate.ToString("g")</dd>
+                        @if (Model.ReviewedBy != null)
+                        {
+                                <dt class="col-sm-4">Reviewed By</dt>
+                                <dd class="col-sm-8">@Model.ReviewedBy</dd>
+                                <dt class="col-sm-4">Reviewed Date</dt>
+                                <dd class="col-sm-8">@Model.ReviewedDate?.ToString("g")</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ReviewNotes))
+            {
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="card-title">Review Notes</h5>
+                            <div class="alert alert-info">
+                                @Model.ReviewNotes
+                            </div>
+                        </div>
+                    </div>
+            }
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                @if (User.IsInRole("ReviewTeam") && Model.Status == PrescriptionStatus.Submitted)
+                {
+                        <a asp-action="Review" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="bi bi-clipboard-check"></i> Review
+                        </a>
+                }
+                @if (User.IsInRole("DeliveryTeam") && Model.Status == PrescriptionStatus.Approved)
+                {
+                        <a asp-action="UpdateShipment" asp-route-id="@Model.Id" class="btn btn-info">
+                            <i class="bi bi-truck"></i> Update Shipment
+                        </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+}

@@ -1,0 +1,74 @@
+@model MedFormPro.Web.Models.PrescriptionDetailsViewModel
+
+@{
+    ViewData["Title"] = "Update Shipment Status";
+}
+
+<div class="container">
+    <h1>Update Shipment Status</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="card-title">Patient Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Patient Name</dt>
+                        <dd class="col-sm-8">@Model.PatientName</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="card-title">Medication Details</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Medication</dt>
+                        <dd class="col-sm-8">@Model.MedicationName</dd>
+                        <dt class="col-sm-4">Dosage</dt>
+                        <dd class="col-sm-8">@Model.Dosage</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <form asp-action="UpdateShipment" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Current Status</label>
+                            <div class="form-control-plaintext">
+                                <span class="badge bg-@(Model.ShipmentStatus == ShipmentStatus.Delivered ? "success" :
+                                                Model.ShipmentStatus == ShipmentStatus.Backorder ? "danger" : "info")">
+                                    @Model.ShipmentStatus
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Update Status To</label>
+                            <select name="status" class="form-select" required>
+                                <option value="">Select new status...</option>
+                                <option value="@ShipmentStatus.Backorder">Backorder</option>
+                                <option value="@ShipmentStatus.Fulfilled">Fulfilled</option>
+                                <option value="@ShipmentStatus.Shipped">Shipped</option>
+                                <option value="@ShipmentStatus.Delivered">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Update Status</button>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+}

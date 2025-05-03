@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
@@ -9,20 +9,20 @@
     <SelfContained>true</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
-    <PublishDir>bin/Release/net6.0/linux-x64/publish</PublishDir>
+    <PublishDir>bin/Release/net7.0/linux-x64/publish</PublishDir>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.27" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.27">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.15">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
   </ItemGroup>
 
   <Target Name="PostPublish" AfterTargets="Publish">
-    <Exec Command="echo 'web: cd MedFormPro.Web &amp;&amp; dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > ../Procfile" />
+    <Exec Command="echo 'web: cd MedFormPro.Web &amp;&amp; dotnet bin/Release/net7.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > ../Procfile" />
   </Target>
 
 </Project>

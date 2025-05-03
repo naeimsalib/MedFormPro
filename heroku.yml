@@ -1,6 +1,6 @@
 build:
   config:
-    DOTNET_SDK_VERSION: "7.0.401"
+    DOTNET_SDK_VERSION: "7.0.100"
   commands:
     - dotnet restore
     - dotnet publish -c Release -r linux-x64 --self-contained true

@@ -6,7 +6,7 @@ MedForm Pro is a comprehensive web-based prescription management system built wi
 
 ### Landing Page
 
-![Landing Page](wwwroot/images/docs/landing.png)
+![Landing Page](MedFormPro.Web/wwwroot/images/docs/Landing-page.png)
 
 The landing page provides an overview of the system's core functionalities:
 
@@ -17,7 +17,7 @@ The landing page provides an overview of the system's core functionalities:
 
 ### Login Interface
 
-![Login Page](wwwroot/images/docs/login.png)
+![Login Page](MedFormPro.Web/wwwroot/images/docs/login.png)
 
 Secure authentication system featuring:
 
@@ -32,7 +32,7 @@ Secure authentication system featuring:
 
 #### Prescription Creation
 
-![Create Prescription](wwwroot/images/docs/create-prescription.png)
+![Create Prescription](MedFormPro.Web/wwwroot/images/docs/create-prescription.png)
 
 Pharmacists can create new prescriptions with:
 
@@ -45,7 +45,7 @@ Pharmacists can create new prescriptions with:
 
 #### My Prescriptions View
 
-![Pharmacist Dashboard](wwwroot/images/docs/pharmacist-dashboard.png)
+![Pharmacist Dashboard](MedFormPro.Web/wwwroot/images/docs/)
 
 Pharmacists can track their prescriptions with:
 
@@ -59,7 +59,7 @@ Pharmacists can track their prescriptions with:
 
 #### Active Prescriptions Review
 
-![Review Interface](wwwroot/images/docs/review-prescriptions.png)
+![Review Interface](MedFormPro.Web/wwwroot/images/docs/review-interface.png)
 
 Review team members can:
 
@@ -71,7 +71,7 @@ Review team members can:
 
 #### Review History
 
-![Review History](wwwroot/images/docs/review-history.png)
+![Review History](MedFormPro.Web/wwwroot/images/docs/review-history.png)
 
 Comprehensive history tracking showing:
 
@@ -85,7 +85,7 @@ Comprehensive history tracking showing:
 
 #### Delivery Management
 
-![Delivery Management](wwwroot/images/docs/delivery-management.png)
+![Delivery Management](MedFormPro.Web/wwwroot/images/docs/delivery-managment.png)
 
 Delivery team features include:
 
@@ -99,7 +99,7 @@ Delivery team features include:
 
 #### All Prescriptions View
 
-![Admin Dashboard](wwwroot/images/docs/admin-dashboard.png)
+![Admin Dashboard](MedFormPro.Web/wwwroot/images/docs/admin-dashboard.png)
 
 Administrators have access to:
 

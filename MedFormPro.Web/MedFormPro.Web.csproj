@@ -7,8 +7,8 @@
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <PublishReadyToRun>true</PublishReadyToRun>
     <SelfContained>true</SelfContained>
-    <PublishSingleFile>true</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
+    <PublishSingleFile>false</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
     <PublishDir>bin/Release/net7.0/linux-x64/publish</PublishDir>
   </PropertyGroup>
 
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <Target Name="PostPublish" AfterTargets="Publish">
-    <Exec Command="echo 'web: cd MedFormPro.Web &amp;&amp; dotnet bin/Release/net7.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > Procfile" />
+    <Exec Command="echo 'web: cd MedFormPro.Web &amp;&amp; dotnet bin/Release/net7.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > ../Procfile" />
   </Target>
 
 </Project>

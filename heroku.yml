@@ -1,10 +1,6 @@
 build:
   config:
     DOTNET_SDK_VERSION: "7.0.401"
-    DOTNET_RUNTIME_VERSION: "7.0.0"
-  packages:
-    - dotnet-sdk-7.0
-    - dotnet-runtime-7.0
   commands:
     - dotnet restore
     - dotnet publish -c Release -r linux-x64 --self-contained true

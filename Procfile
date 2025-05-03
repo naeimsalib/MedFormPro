@@ -1,1 +1,1 @@
-web: cd MedFormPro.Web && dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT 
+web: cd MedFormPro.Web && dotnet bin/Release/net7.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT 

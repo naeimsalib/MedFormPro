@@ -1,10 +1,33 @@
 using Microsoft.EntityFrameworkCore;
 using MedFormPro.Web.Data;
+using Microsoft.AspNetCore.DataProtection;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add Redis for session management
+var redisConnection = Environment.GetEnvironmentVariable("REDIS_URL");
+if (!string.IsNullOrEmpty(redisConnection))
+{
+    try
+    {
+        var redis = ConnectionMultiplexer.Connect(redisConnection);
+        builder.Services.AddDataProtection()
+            .PersistKeysToStackExchangeRedis(redis, "DataProtection-Keys");
+        builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisConnection;
+            options.InstanceName = "MedFormPro_";
+        });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error connecting to Redis: {ex.Message}");
+    }
+}
 
 // Add DbContext with PostgreSQL
 var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
@@ -16,14 +39,21 @@ if (string.IsNullOrEmpty(connectionString))
 // Convert Heroku PostgreSQL URL to connection string if needed
 if (connectionString.StartsWith("postgres://"))
 {
-    var uri = new Uri(connectionString);
-    var db = uri.AbsolutePath.TrimStart('/');
-    var user = uri.UserInfo.Split(':')[0];
-    var passwd = uri.UserInfo.Split(':')[1];
-    var port = uri.Port > 0 ? uri.Port : 5432;
-    var host = uri.Host;
+    try
+    {
+        var uri = new Uri(connectionString);
+        var db = uri.AbsolutePath.TrimStart('/');
+        var user = uri.UserInfo.Split(':')[0];
+        var passwd = uri.UserInfo.Split(':')[1];
+        var port = uri.Port > 0 ? uri.Port : 5432;
+        var host = uri.Host;
 
-    connectionString = $"Host={host};Database={db};Username={user};Password={passwd};Port={port};SSL Mode=Require;Trust Server Certificate=true";
+        connectionString = $"Host={host};Database={db};Username={user};Password={passwd};Port={port};SSL Mode=Require;Trust Server Certificate=true";
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
+    }
 }
 
 // Configure DbContext
@@ -46,6 +76,8 @@ builder.Services.AddAuthentication("Cookies")
         options.LoginPath = "/Account/Login";
         options.LogoutPath = "/Account/Logout";
         options.AccessDeniedPath = "/Account/AccessDenied";
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.SameSite = SameSiteMode.Lax;
     });
 
 builder.Services.AddAuthorization(options =>

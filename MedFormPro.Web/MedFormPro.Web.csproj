@@ -9,6 +9,7 @@
     <SelfContained>true</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
+    <PublishDir>bin/Release/net6.0/linux-x64/publish</PublishDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,5 +20,9 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
   </ItemGroup>
+
+  <Target Name="PostPublish" AfterTargets="Publish">
+    <Exec Command="echo 'web: cd MedFormPro.Web && dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > ../Procfile" />
+  </Target>
 
 </Project>

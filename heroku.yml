@@ -1,7 +1,12 @@
 build:
   config:
     DOTNET_SDK_VERSION: "6.0.100"
+    DOTNET_RUNTIME_VERSION: "6.0.0"
   packages:
     - dotnet-sdk-6.0
+    - dotnet-runtime-6.0
+  commands:
+    - dotnet restore
+    - dotnet publish -c Release -r linux-x64 --self-contained true
 run:
   web: cd MedFormPro.Web && dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT 

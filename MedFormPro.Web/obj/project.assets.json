@@ -349,7 +349,7 @@
         }
       }
     },
-    "net6.0/linux-x64": {
+    "net6.0/win-x64": {
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1133,20 +1133,20 @@
     ]
   },
   "packageFolders": {
-    "/Users/naeimsalib/.nuget/packages/": {}
+    "C:\\Users\\naeim\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/naeimsalib/Desktop/code/MedForm Pro/MedFormPro.Web/MedFormPro.Web.csproj",
+      "projectUniqueName": "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\MedFormPro.Web.csproj",
       "projectName": "MedFormPro.Web",
-      "projectPath": "/Users/naeimsalib/Desktop/code/MedForm Pro/MedFormPro.Web/MedFormPro.Web.csproj",
-      "packagesPath": "/Users/naeimsalib/.nuget/packages/",
-      "outputPath": "/Users/naeimsalib/Desktop/code/MedForm Pro/MedFormPro.Web/obj/",
+      "projectPath": "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\MedFormPro.Web.csproj",
+      "packagesPath": "C:\\Users\\naeim\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/naeimsalib/Desktop/code/MedForm Pro/NuGet.Config",
-        "/Users/naeimsalib/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\NuGet.Config",
+        "C:\\Users\\naeim\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1164,7 +1164,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net6.0": {
@@ -1202,15 +1208,15 @@
             "version": "[6.0.36, 6.0.36]"
           },
           {
-            "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
             "version": "[6.0.36, 6.0.36]"
           },
           {
-            "name": "Microsoft.NETCore.App.Crossgen2.osx-arm64",
+            "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
             "version": "[6.0.36, 6.0.36]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "name": "Microsoft.NETCore.App.Host.win-x64",
             "version": "[6.0.36, 6.0.36]"
           },
           {
@@ -1218,7 +1224,15 @@
             "version": "[6.0.36, 6.0.36]"
           },
           {
-            "name": "Microsoft.NETCore.App.Runtime.linux-x64",
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
             "version": "[6.0.36, 6.0.36]"
           }
         ],
@@ -1230,11 +1244,11 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet@8/8.0.15/libexec/sdk/8.0.115/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
-      "linux-x64": {
+      "win-x64": {
         "#import": []
       }
     }

@@ -26,8 +26,18 @@ if (connectionString.StartsWith("postgres://"))
     connectionString = $"Host={host};Database={db};Username={user};Password={passwd};Port={port};SSL Mode=Require;Trust Server Certificate=true";
 }
 
+// Configure DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+    if (connectionString.Contains("postgres"))
+    {
+        options.UseNpgsql(connectionString);
+    }
+    else
+    {
+        options.UseSqlite(connectionString);
+    }
+});
 
 // Add Authentication
 builder.Services.AddAuthentication("Cookies")

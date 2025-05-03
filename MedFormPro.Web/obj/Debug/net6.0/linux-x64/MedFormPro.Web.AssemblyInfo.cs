@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedFormPro.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21fdb686c3c3617e4f0ae8d40e1d54b1bcc47af0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedFormPro.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedFormPro.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

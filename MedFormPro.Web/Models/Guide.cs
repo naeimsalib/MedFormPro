@@ -7,15 +7,17 @@ namespace MedFormPro.Web.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string Title { get; set; }
+        [StringLength(200)]
+        public required string Title { get; set; }
 
         [Required]
-        public string Content { get; set; }
+        public required string Content { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Category { get; set; }
+        public required string Category { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; }
 
         public int DisplayOrder { get; set; }
 

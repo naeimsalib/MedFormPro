@@ -35,7 +35,9 @@ namespace MedFormPro.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Email == model.Email);
+
                 if (user != null && VerifyPassword(model.Password, user.PasswordHash))
                 {
                     var claims = new List<Claim>
@@ -56,7 +58,7 @@ namespace MedFormPro.Web.Controllers
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
 
-                    return RedirectToAction("Index", "Prescription");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");

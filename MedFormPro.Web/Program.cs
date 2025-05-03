@@ -3,6 +3,7 @@ using MedFormPro.Web.Data;
 using Microsoft.AspNetCore.DataProtection;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.DataProtection.StackExchangeRedis;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 var builder = WebApplication.CreateBuilder(args);
 

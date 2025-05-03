@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="container">
@@ -7,11 +7,15 @@
         <h1 class="display-4 mb-4">Welcome to MedFormPro</h1>
         <p class="lead mb-5">A comprehensive prescription management system for pharmacies</p>
         
-        @if (!User.Identity.IsAuthenticated)
+        @if (User.Identity?.IsAuthenticated == true)
         {
-                    <div class="mb-4">
-                        <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg px-4">Login to System</a>
-                    </div>
+            <p>Hello, @User.Identity.Name!</p>
+        }
+        else
+        {
+            <div class="mb-4">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg px-4">Login to System</a>
+            </div>
         }
     </div>
 

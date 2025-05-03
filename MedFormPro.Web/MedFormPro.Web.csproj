@@ -9,7 +9,6 @@
     <SelfContained>true</SelfContained>
     <PublishSingleFile>false</PublishSingleFile>
     <PublishTrimmed>false</PublishTrimmed>
-    <PublishDir>bin/Release/net7.0/linux-x64/publish</PublishDir>
   </PropertyGroup>
 
   <ItemGroup>

@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <Target Name="PostPublish" AfterTargets="Publish">
-    <Exec Command="echo 'web: cd MedFormPro.Web && dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > ../Procfile" />
+    <Exec Command="echo 'web: cd MedFormPro.Web &amp;&amp; dotnet bin/Release/net6.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT' > ../Procfile" />
   </Target>
 
 </Project>

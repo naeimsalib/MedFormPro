@@ -1,8 +1,8 @@
 build:
-  config:
-    DOTNET_SDK_VERSION: "9.0.200"
-  commands:
-    - dotnet restore
-    - dotnet publish -c Release -r linux-x64 --self-contained true
+  packages:
+    - dotnet-sdk-9.0
+    - dotnet-runtime-9.0
+  languages:
+    - dotnet
 run:
   web: cd MedFormPro.Web && dotnet bin/Release/net9.0/linux-x64/publish/MedFormPro.Web.dll --urls http://0.0.0.0:$PORT 

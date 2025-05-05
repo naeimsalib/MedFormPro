@@ -2,168 +2,50 @@
 
 MedForm Pro is a comprehensive web-based prescription management system built with ASP.NET Core MVC. It facilitates the entire prescription lifecycle, from creation to delivery, with role-based access control and a streamlined workflow.
 
-## System Overview
+## Quick Start Guide
 
-### Landing Page
+### Default Admin Account
 
-![Landing Page](MedFormPro.Web/wwwroot/images/docs/Landing-page.png)
+To access the system as an administrator:
 
-The landing page provides an overview of the system's core functionalities:
+- Email: admin@medformpro.com
+- Password: Admin123!
 
-- Clear role descriptions for Pharmacists, Review Team, and Delivery Team
-- Key features highlighting secure access control and real-time tracking
-- Simple login access for authorized users
-- Modern, clean interface design
+### User Roles and Access
 
-### Login Interface
+1. **Administrator**
 
-![Login Page](MedFormPro.Web/wwwroot/images/docs/login.png)
+   - Full system access
+   - User management (create, edit, delete users)
+   - View all prescriptions
+   - Manage system settings
 
-Secure authentication system featuring:
+2. **Pharmacist**
 
-- Email-based login
-- Password protection
-- Remember me functionality
-- Clean, minimalist design for easy access
+   - Create new prescriptions
+   - View own prescriptions
+   - Track prescription status
 
-## Role-Based Interfaces
+3. **Review Team**
 
-### 1. Pharmacist Interface
+   - Review submitted prescriptions
+   - Approve or deny prescriptions
+   - View review history
 
-#### Prescription Creation
+4. **Delivery Team**
+   - Manage approved prescriptions
+   - Update delivery status
+   - Track shipments
 
-![Create Prescription](MedFormPro.Web/wwwroot/images/docs/create-prescription.png)
+## Installation and Setup
 
-Pharmacists can create new prescriptions with:
+### Prerequisites
 
-- Patient information input
-- Medication details
-- Dosage specifications
-- Detailed instructions
-- Simple form validation
-- Quick submission process
+- .NET 8.0 SDK
+- SQLite (included)
+- Git
 
-#### My Prescriptions View
-
-![Pharmacist Dashboard](MedFormPro.Web/wwwroot/images/docs/)
-
-Pharmacists can track their prescriptions with:
-
-- Complete list of submitted prescriptions
-- Status tracking (Submitted, Approved, Denied)
-- Shipment status monitoring
-- Creation date tracking
-- Action buttons for details and management
-
-### 2. Review Team Interface
-
-#### Active Prescriptions Review
-
-![Review Interface](MedFormPro.Web/wwwroot/images/docs/review-interface.png)
-
-Review team members can:
-
-- View all submitted prescriptions
-- Access prescription details
-- Make approval/denial decisions
-- Track prescription status
-- Monitor shipment status
-
-#### Review History
-
-![Review History](MedFormPro.Web/wwwroot/images/docs/review-history.png)
-
-Comprehensive history tracking showing:
-
-- Previously reviewed prescriptions
-- Review decisions (Approved/Denied)
-- Review timestamps
-- Current shipment status
-- Quick access to prescription details
-
-### 3. Delivery Team Interface
-
-#### Delivery Management
-
-![Delivery Management](MedFormPro.Web/wwwroot/images/docs/delivery-managment.png)
-
-Delivery team features include:
-
-- List of approved prescriptions
-- Current shipment status
-- Delivery tracking
-- Status update capabilities
-- Detailed prescription information
-
-### 4. Admin Interface
-
-#### All Prescriptions View
-
-![Admin Dashboard](MedFormPro.Web/wwwroot/images/docs/admin-dashboard.png)
-
-Administrators have access to:
-
-- Complete prescription database
-- Status monitoring across all stages
-- Shipment tracking
-- System-wide oversight
-- Detailed prescription information
-
-## Status Indicators
-
-The system uses clear visual indicators:
-
-### Prescription Status
-
-- **Submitted** (Yellow): Initial state after pharmacist creation
-- **Approved** (Green): Reviewed and approved by review team
-- **Denied** (Red): Reviewed and denied by review team
-
-### Shipment Status
-
-- **Pending** (Blue): Awaiting processing
-- **Fulfilled** (Light Blue): Ready for delivery
-- **Delivered** (Green): Successfully delivered to patient
-
-## Action Buttons
-
-- **Details**: View complete prescription information
-- **Review**: Access review interface (Review Team only)
-- **Update Shipment**: Modify shipment status (Delivery Team only)
-- **Back to List**: Return to previous view
-
-## Security Features
-
-1. Role-Based Access Control
-
-- Distinct interfaces for each role
-- Protected routes and actions
-- Secure authentication
-
-2. Data Protection
-
-- Secure password handling
-- Protected prescription information
-- Audit trail of all actions
-
-## Database Integration
-
-The system maintains detailed records of:
-
-- All prescriptions and their status
-- Review decisions and timestamps
-- Shipment tracking information
-- User actions and changes
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## Installation
+### Installation Steps
 
 1. Clone the repository:
 
@@ -172,9 +54,9 @@ git clone https://github.com/yourusername/MedFormPro.git
 cd MedFormPro
 ```
 
-2. Install .NET 6.0 SDK if not already installed:
+2. Install .NET 8.0 SDK if not already installed:
 
-- Download from [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+- Download from [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 3. Restore dependencies:
 
@@ -191,25 +73,106 @@ dotnet ef database update
 5. Run the application:
 
 ```bash
-dotnet run --project MedFormPro.Web
+cd MedFormPro.Web
+dotnet run
 ```
 
-## Default Admin Account
+6. Access the application:
 
-- Email: admin@medformpro.com
-- Password: Admin123!
+- Open your browser and navigate to `http://localhost:5160`
+- Log in using the default admin credentials
+
+## User Management Guide
+
+### Creating New Users (Admin Only)
+
+1. Log in as administrator
+2. Click "Manage Users" in the navigation menu
+3. Click "Create New User" button
+4. Fill in the user details:
+   - Username
+   - Email
+   - First Name
+   - Last Name
+   - Role (select from dropdown)
+   - Password
+   - Confirm Password
+5. Click "Create User"
+
+### Editing Users (Admin Only)
+
+1. Go to "Manage Users"
+2. Click "Edit" next to the user
+3. Update the required information
+4. To change password, enter new password (optional)
+5. Click "Save Changes"
+
+### Deleting Users (Admin Only)
+
+1. Go to "Manage Users"
+2. Click "Delete" next to the user
+3. Confirm deletion
+   Note: The last administrator cannot be deleted
+
+## System Features
+
+### Prescription Management
+
+- Create new prescriptions (Pharmacists)
+- Review and approve/deny (Review Team)
+- Track delivery status (Delivery Team)
+- Monitor all prescriptions (Administrators)
+
+### Status Tracking
+
+- Prescription Status: Submitted → Approved/Denied
+- Shipment Status: Pending → Fulfilled → Delivered
+
+### Security Features
+
+- Role-based access control
+- Secure password handling
+- Protected routes and actions
+- Audit trail of all actions
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Database Connection Issues**
+
+   - Ensure SQLite is properly installed
+   - Check database file permissions
+   - Run database migrations
+
+2. **Authentication Problems**
+
+   - Verify correct email format
+   - Check password requirements
+   - Clear browser cookies if needed
+
+3. **Role Access Issues**
+   - Verify user role assignment
+   - Check role-based route protection
+   - Ensure proper login/logout
 
 ## Support
 
-For support, please email support@medformpro.com or open an issue in the repository.
+For support:
+
+- Email: support@medformpro.com
+- Open an issue in the repository
+- Check the documentation
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## Technical Stack
 
-- Built with ASP.NET Core MVC
-- Uses Entity Framework Core
+- ASP.NET Core 8.0
+- Entity Framework Core
 - SQLite Database
-- Bootstrap for UI
+- Bootstrap 5
+- Font Awesome Icons
+- jQuery

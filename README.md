@@ -6,12 +6,16 @@ MedForm Pro is a comprehensive web-based prescription management system built wi
 
 ### Default Admin Account
 
+![Login Page](MedFormPro.Web/wwwroot/images/docs/login.png)
+
 To access the system as an administrator:
 
 - Email: admin@medformpro.com
 - Password: Admin123!
 
 ### User Roles and Access
+
+![Landing Page](MedFormPro.Web/wwwroot/images/docs/Landing-page.png)
 
 1. **Administrator**
 
@@ -86,6 +90,8 @@ dotnet run
 
 ### Creating New Users (Admin Only)
 
+![Create Prescription](MedFormPro.Web/wwwroot/images/docs/create-prescription.png)
+
 1. Log in as administrator
 2. Click "Manage Users" in the navigation menu
 3. Click "Create New User" button
@@ -101,6 +107,8 @@ dotnet run
 
 ### Editing Users (Admin Only)
 
+![Review Interface](MedFormPro.Web/wwwroot/images/docs/review-interface.png)
+
 1. Go to "Manage Users"
 2. Click "Edit" next to the user
 3. Update the required information
@@ -108,6 +116,8 @@ dotnet run
 5. Click "Save Changes"
 
 ### Deleting Users (Admin Only)
+
+![Review History](MedFormPro.Web/wwwroot/images/docs/review-history.png)
 
 1. Go to "Manage Users"
 2. Click "Delete" next to the user
@@ -118,12 +128,16 @@ dotnet run
 
 ### Prescription Management
 
+![Delivery Management](MedFormPro.Web/wwwroot/images/docs/delivery-managment.png)
+
 - Create new prescriptions (Pharmacists)
 - Review and approve/deny (Review Team)
 - Track delivery status (Delivery Team)
 - Monitor all prescriptions (Administrators)
 
 ### Status Tracking
+
+![Admin Dashboard](MedFormPro.Web/wwwroot/images/docs/admin-dashboard.png)
 
 - Prescription Status: Submitted → Approved/Denied
 - Shipment Status: Pending → Fulfilled → Delivered

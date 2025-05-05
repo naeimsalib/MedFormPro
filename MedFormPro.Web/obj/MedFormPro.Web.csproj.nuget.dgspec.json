@@ -1,31 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\MedFormPro.Web.csproj": {}
+    "/Users/naeimsalib/Downloads/temp-code/MedFormProClean/MedFormPro.Web/MedFormPro.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\MedFormPro.Web.csproj": {
+    "/Users/naeimsalib/Downloads/temp-code/MedFormProClean/MedFormPro.Web/MedFormPro.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\MedFormPro.Web.csproj",
+        "projectUniqueName": "/Users/naeimsalib/Downloads/temp-code/MedFormProClean/MedFormPro.Web/MedFormPro.Web.csproj",
         "projectName": "MedFormPro.Web",
-        "projectPath": "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\MedFormPro.Web.csproj",
-        "packagesPath": "C:\\Users\\naeim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\MedFormPro.Web\\obj\\",
+        "projectPath": "/Users/naeimsalib/Downloads/temp-code/MedFormProClean/MedFormPro.Web/MedFormPro.Web.csproj",
+        "packagesPath": "/Users/naeimsalib/.nuget/packages/",
+        "outputPath": "/Users/naeimsalib/Downloads/temp-code/MedFormProClean/MedFormPro.Web/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\naeim\\Desktop\\code\\MedFormPro\\NuGet.Config",
-          "C:\\Users\\naeim\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/naeimsalib/Downloads/temp-code/MedFormProClean/NuGet.Config",
+          "/Users/naeimsalib/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -38,26 +38,41 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.DataProtection.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.27, )"
+              "version": "[8.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.27, )"
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[6.0.22, )"
+              "version": "[8.0.2, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.7.20, )"
             }
           },
           "imports": [
@@ -73,36 +88,16 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
+              "name": "Microsoft.AspNetCore.App.Runtime.osx-arm64",
+              "version": "[8.0.2, 8.0.2]"
             },
             {
-              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[6.0.36, 6.0.36]"
+              "name": "Microsoft.NETCore.App.Crossgen2.osx-arm64",
+              "version": "[8.0.2, 8.0.2]"
             },
             {
-              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.36, 6.0.36]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[6.0.36, 6.0.36]"
+              "name": "Microsoft.NETCore.App.Runtime.osx-arm64",
+              "version": "[8.0.2, 8.0.2]"
             }
           ],
           "frameworkReferences": {
@@ -113,11 +108,11 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/naeimsalib/.dotnet/sdk/8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
-        "win-x64": {
+        "osx-arm64": {
           "#import": []
         }
       }

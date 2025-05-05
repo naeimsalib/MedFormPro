@@ -44,4 +44,45 @@ namespace MedFormPro.Web.Models
         [Required]
         public UserRole Role { get; set; }
     }
+
+    public class UserListViewModel
+    {
+        public int Id { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public UserRole Role { get; set; }
+    }
+
+    public class EditUserViewModel
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public required string Username { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [StringLength(100)]
+        public required string Email { get; set; }
+
+        [Required]
+        public required string FirstName { get; set; }
+
+        [Required]
+        public required string LastName { get; set; }
+
+        [Required]
+        public UserRole Role { get; set; }
+
+        [StringLength(100, MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        public string? Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string? ConfirmPassword { get; set; }
+    }
 }

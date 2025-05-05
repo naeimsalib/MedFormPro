@@ -190,3 +190,113 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Bootstrap 5
 - Font Awesome Icons
 - jQuery
+
+## Quick Deployment Guide
+
+### Deploying to Azure App Service (Free Tier)
+
+1. **Prerequisites**
+
+   - Azure account (free tier available)
+   - Azure CLI installed
+   - Git installed
+
+2. **Install Azure CLI**
+
+   ```bash
+   # For macOS
+   brew install azure-cli
+
+   # For Windows
+   winget install Microsoft.AzureCLI
+   ```
+
+3. **Login to Azure**
+
+   ```bash
+   az login
+   ```
+
+4. **Create Azure Resources**
+
+   ```bash
+   # Create resource group
+   az group create --name medformpro-demo --location eastus
+
+   # Create app service plan (Free tier)
+   az appservice plan create --name medformpro-plan --resource-group medformpro-demo --sku F1 --is-linux
+
+   # Create web app
+   az webapp create --resource-group medformpro-demo --plan medformpro-plan --name medformpro-demo --runtime "DOTNET:8.0"
+   ```
+
+5. **Configure App Settings**
+
+   ```bash
+   az webapp config appsettings set --resource-group medformpro-demo --name medformpro-demo --settings ASPNETCORE_ENVIRONMENT=Production
+   ```
+
+6. **Deploy the Application**
+
+   ```bash
+   # Configure local git deployment
+   az webapp deployment source config-local-git --name medformpro-demo --resource-group medformpro-demo
+
+   # Add Azure remote
+   git remote add azure <git-url-from-previous-command>
+
+   # Deploy
+   git push azure main
+   ```
+
+7. **Access Your Application**
+   - Your app will be available at: `https://medformpro-demo.azurewebsites.net`
+   - Default admin credentials remain the same:
+     - Email: admin@medformpro.com
+     - Password: Admin123!
+
+### Alternative Deployment Options
+
+1. **GitHub Pages** (Static content only)
+
+   - Not recommended for this application as it requires server-side processing
+
+2. **Heroku**
+
+   - Requires PostgreSQL database
+   - Free tier available but with limitations
+
+3. **DigitalOcean App Platform**
+
+   - Easy deployment
+   - Free trial available
+   - Good performance
+
+4. **AWS Elastic Beanstalk**
+   - Free tier available
+   - More complex setup
+   - Good for production use
+
+### Important Deployment Notes
+
+1. **Database Considerations**
+
+   - The application uses SQLite by default
+   - For production, consider using Azure SQL Database or PostgreSQL
+   - Update connection strings in `appsettings.json`
+
+2. **Environment Variables**
+
+   - Set `ASPNETCORE_ENVIRONMENT=Production`
+   - Configure any additional environment variables as needed
+
+3. **Security**
+
+   - Change default admin password after first login
+   - Enable HTTPS
+   - Configure proper authentication
+
+4. **Scaling**
+   - Free tier has limitations
+   - Consider upgrading for production use
+   - Monitor application performance

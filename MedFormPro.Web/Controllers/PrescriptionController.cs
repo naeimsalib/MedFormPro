@@ -7,14 +7,9 @@ using MedFormPro.Web.Models;
 namespace MedFormPro.Web.Controllers
 {
     [Authorize]
-    public class PrescriptionController : Controller
+    public class PrescriptionController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public PrescriptionController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public PrescriptionController(ApplicationDbContext context) : base(context) { }
 
         // GET: Prescription
         public async Task<IActionResult> Index()

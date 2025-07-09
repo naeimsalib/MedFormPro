@@ -13,14 +13,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MedFormPro.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public AccountController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public AccountController(ApplicationDbContext context) : base(context) { }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {

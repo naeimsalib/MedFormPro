@@ -5,14 +5,9 @@ using MedFormPro.Web.Models;
 
 namespace MedFormPro.Web.Controllers
 {
-    public class GuideController : Controller
+    public class GuideController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-
-        public GuideController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public GuideController(ApplicationDbContext context) : base(context) { }
 
         // GET: Guide
         public async Task<IActionResult> Index()

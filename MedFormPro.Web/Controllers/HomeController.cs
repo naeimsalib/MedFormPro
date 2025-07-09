@@ -4,11 +4,11 @@ using MedFormPro.Web.Models;
 
 namespace MedFormPro.Web.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ApplicationDbContext context, ILogger<HomeController> logger) : base(context)
     {
         _logger = logger;
     }

@@ -70,7 +70,7 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Welcome @User.Identity.Name!</span>
+                                <span class="nav-link text-dark">Welcome @ViewData["FullName"]!</span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">

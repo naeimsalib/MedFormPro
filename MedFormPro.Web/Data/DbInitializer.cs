@@ -1,6 +1,7 @@
 using MedFormPro.Web.Models;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace MedFormPro.Web.Data
 {
@@ -17,12 +18,12 @@ namespace MedFormPro.Web.Data
                 {
                     Username = "admin",
                     Email = "admin@medformpro.com",
-                    PasswordHash = HashPassword("Admin123!"),
                     FirstName = "System",
                     LastName = "Administrator",
-                    Role = UserRole.Admin
+                    Role = "Admin"
                 };
-
+                var hasher = new PasswordHasher<User>();
+                admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
                 context.Users.Add(admin);
                 context.SaveChanges();
             }
@@ -111,15 +112,6 @@ namespace MedFormPro.Web.Data
 
             context.Guides.AddRange(guides);
             context.SaveChanges();
-        }
-
-        private static string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
-            }
         }
     }
 }

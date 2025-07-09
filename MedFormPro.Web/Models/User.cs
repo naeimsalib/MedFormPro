@@ -12,27 +12,19 @@ namespace MedFormPro.Web.Models
 
         [Required]
         [StringLength(100)]
-        public required string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } = string.Empty;
 
         [Required]
         [StringLength(100)]
         public required string Email { get; set; }
 
         [Required]
-        public UserRole Role { get; set; }
+        public string Role { get; set; } = string.Empty;
 
         [Required]
         public required string FirstName { get; set; }
 
         [Required]
         public required string LastName { get; set; }
-    }
-
-    public enum UserRole
-    {
-        Admin,
-        Pharmacist,
-        ReviewTeam,
-        DeliveryTeam
     }
 }

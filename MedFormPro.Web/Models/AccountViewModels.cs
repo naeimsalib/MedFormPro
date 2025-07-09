@@ -42,7 +42,7 @@ namespace MedFormPro.Web.Models
         public required string LastName { get; set; }
 
         [Required]
-        public UserRole Role { get; set; }
+        public string Role { get; set; } = string.Empty;
     }
 
     public class UserListViewModel
@@ -52,7 +52,7 @@ namespace MedFormPro.Web.Models
         public string Email { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public UserRole Role { get; set; }
+        public string Role { get; set; } = string.Empty;
     }
 
     public class EditUserViewModel
@@ -75,7 +75,7 @@ namespace MedFormPro.Web.Models
         public required string LastName { get; set; }
 
         [Required]
-        public UserRole Role { get; set; }
+        public string Role { get; set; } = string.Empty;
 
         [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]

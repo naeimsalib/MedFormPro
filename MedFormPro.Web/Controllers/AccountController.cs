@@ -8,6 +8,7 @@ using MedFormPro.Web.Models;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MedFormPro.Web.Controllers
 {
@@ -38,27 +39,32 @@ namespace MedFormPro.Web.Controllers
                 var user = await _context.Users
                     .FirstOrDefaultAsync(u => u.Email == model.Email);
 
-                if (user != null && VerifyPassword(model.Password, user.PasswordHash))
+                if (user != null)
                 {
-                    var claims = new List<Claim>
+                    var hasher = new PasswordHasher<User>();
+                    var result = hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
+                    if (result == PasswordVerificationResult.Success)
                     {
-                        new Claim(ClaimTypes.Name, user.Username),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Role, user.Role.ToString())
-                    };
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, user.Username),
+                            new Claim(ClaimTypes.Email, user.Email),
+                            new Claim(ClaimTypes.Role, user.Role)
+                        };
 
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var authProperties = new AuthenticationProperties
-                    {
-                        IsPersistent = model.RememberMe
-                    };
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var authProperties = new AuthenticationProperties
+                        {
+                            IsPersistent = model.RememberMe
+                        };
 
-                    await HttpContext.SignInAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(claimsIdentity),
-                        authProperties);
+                        await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(claimsIdentity),
+                            authProperties);
 
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
@@ -96,11 +102,12 @@ namespace MedFormPro.Web.Controllers
                 {
                     Username = model.Username,
                     Email = model.Email,
-                    PasswordHash = HashPassword(model.Password),
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Role = model.Role
                 };
+                var hasher = new PasswordHasher<User>();
+                user.PasswordHash = hasher.HashPassword(user, model.Password);
 
                 _context.Add(user);
                 await _context.SaveChangesAsync();
@@ -118,20 +125,6 @@ namespace MedFormPro.Web.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
-            }
-        }
-
-        private bool VerifyPassword(string password, string hash)
-        {
-            return HashPassword(password) == hash;
         }
 
         [Authorize(Roles = "Admin")]
@@ -209,7 +202,8 @@ namespace MedFormPro.Web.Controllers
 
                 if (!string.IsNullOrEmpty(model.Password))
                 {
-                    user.PasswordHash = HashPassword(model.Password);
+                    var hasher = new PasswordHasher<User>();
+                    user.PasswordHash = hasher.HashPassword(user, model.Password);
                 }
 
                 await _context.SaveChangesAsync();
@@ -232,9 +226,9 @@ namespace MedFormPro.Web.Controllers
             }
 
             // Prevent deleting the last admin
-            if (user.Role == UserRole.Admin)
+            if (user.Role == "Admin")
             {
-                var adminCount = await _context.Users.CountAsync(u => u.Role == UserRole.Admin);
+                var adminCount = await _context.Users.CountAsync(u => u.Role == "Admin");
                 if (adminCount <= 1)
                 {
                     TempData["ErrorMessage"] = "Cannot delete the last administrator.";

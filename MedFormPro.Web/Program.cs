@@ -38,37 +38,10 @@ if (string.IsNullOrEmpty(connectionString))
     connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 }
 
-// Convert Heroku PostgreSQL URL to connection string if needed
-if (connectionString?.StartsWith("postgres://") == true)
-{
-    try
-    {
-        var uri = new Uri(connectionString);
-        var db = uri.AbsolutePath.TrimStart('/');
-        var user = uri.UserInfo.Split(':')[0];
-        var passwd = uri.UserInfo.Split(':')[1];
-        var port = uri.Port > 0 ? uri.Port : 5432;
-        var host = uri.Host;
-
-        connectionString = $"Host={host};Database={db};Username={user};Password={passwd};Port={port};SSL Mode=Require;Trust Server Certificate=true";
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error parsing DATABASE_URL: {ex.Message}");
-    }
-}
-
-// Configure DbContext
+// Always use PostgreSQL (Supabase)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    if (connectionString?.Contains("postgres") == true)
-    {
-        options.UseNpgsql(connectionString);
-    }
-    else
-    {
-        options.UseSqlite(connectionString ?? "Data Source=MedFormPro.db");
-    }
+    options.UseNpgsql(connectionString);
 });
 
 // Add Authentication
@@ -101,7 +74,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        context.Database.Migrate(); // This will apply any pending migrations
+        // context.Database.Migrate(); // This will apply any pending migrations
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)

@@ -42,28 +42,35 @@ namespace MedFormPro.Web.Controllers
                 if (user != null)
                 {
                     var hasher = new PasswordHasher<User>();
-                    var result = hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
-                    if (result == PasswordVerificationResult.Success)
+                    try
                     {
-                        var claims = new List<Claim>
+                        var result = hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
+                        if (result == PasswordVerificationResult.Success)
                         {
-                            new Claim(ClaimTypes.Name, user.Username),
-                            new Claim(ClaimTypes.Email, user.Email),
-                            new Claim(ClaimTypes.Role, user.Role)
-                        };
+                            var claims = new List<Claim>
+                            {
+                                new Claim(ClaimTypes.Name, user.Username),
+                                new Claim(ClaimTypes.Email, user.Email),
+                                new Claim(ClaimTypes.Role, user.Role)
+                            };
 
-                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                        var authProperties = new AuthenticationProperties
-                        {
-                            IsPersistent = model.RememberMe
-                        };
+                            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            var authProperties = new AuthenticationProperties
+                            {
+                                IsPersistent = model.RememberMe
+                            };
 
-                        await HttpContext.SignInAsync(
-                            CookieAuthenticationDefaults.AuthenticationScheme,
-                            new ClaimsPrincipal(claimsIdentity),
-                            authProperties);
+                            await HttpContext.SignInAsync(
+                                CookieAuthenticationDefaults.AuthenticationScheme,
+                                new ClaimsPrincipal(claimsIdentity),
+                                authProperties);
 
-                        return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid username or password.");
                     }
                 }
 

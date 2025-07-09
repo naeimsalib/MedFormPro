@@ -76,6 +76,24 @@ namespace MedFormPro.Web.Data
 
             // Configure Guide entity
             modelBuilder.Entity<Guide>()
+                .Property(g => g.Id).HasColumnName("id");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.Title).HasColumnName("title");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.Category).HasColumnName("category");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.Content).HasColumnName("content");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.DisplayOrder).HasColumnName("display_order");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.Icon).HasColumnName("icon");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.RoleAccess).HasColumnName("role_access");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.CreatedAt).HasColumnName("created_at");
+            modelBuilder.Entity<Guide>()
+                .Property(g => g.UpdatedAt).HasColumnName("updated_at");
+            modelBuilder.Entity<Guide>()
                 .HasIndex(g => new { g.Category, g.DisplayOrder });
         }
     }

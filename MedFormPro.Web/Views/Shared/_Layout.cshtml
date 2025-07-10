@@ -14,9 +14,12 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 sticky-top shadow-sm">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MedFormPro</a>
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/favicon.ico" alt="MedFormPro Logo" width="32" height="32" class="me-2" style="border-radius:6px;" />
+                    <span class="fw-bold">MedFormPro</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -66,46 +69,94 @@
                             }
                         }
                     </ul>
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav align-items-center">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <li class="nav-item">
-                                <span class="nav-link text-dark">Welcome @ViewData["FullName"]!</span>
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="nav-link text-dark">
+                                    <span class="avatar bg-primary text-white rounded-circle me-2" style="display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;font-weight:bold;">
+                                        @((ViewData["FullName"]?.ToString()?.FirstOrDefault() ?? 'U').ToString().ToUpper())
+                                    </span>
+                                    Welcome @ViewData["FullName"]!
+                                    @if (User.IsInRole("Pharmacist"))
+                                    {
+                                        <span class="badge bg-primary ms-2">Pharmacist</span>
+                                    }
+                                    else if (User.IsInRole("ReviewTeam"))
+                                    {
+                                        <span class="badge bg-success ms-2">Reviewer</span>
+                                    }
+                                    else if (User.IsInRole("DeliveryTeam"))
+                                    {
+                                        <span class="badge bg-warning text-dark ms-2">Delivery</span>
+                                    }
+                                    else if (User.IsInRole("Admin"))
+                                    {
+                                        <span class="badge bg-dark ms-2">Admin</span>
+                                    }
+                                </span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
                                     <button type="submit" class="btn btn-link nav-link text-dark">Logout</button>
                                 </form>
                             </li>
+                            <li class="nav-item ms-2">
+                                <button class="btn btn-outline-secondary" title="Help" onclick="window.location.href='/Guide'">
+                                    <i class="fa fa-question-circle"></i>
+                                </button>
+                            </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                            <li class="nav-item ms-2">
+                                <a class="btn btn-primary px-4" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>
                 </div>
             </div>
         </nav>
+        @if (User.Identity?.IsAuthenticated == true && (User.Identity.Name == "pharmacist1@medformpro.com" || User.Identity.Name == "reviewer1@medformpro.com" || User.Identity.Name == "delivery1@medformpro.com"))
+        {
+            <div class="alert alert-warning text-center mb-0 rounded-0" style="font-size:1.1rem;">
+                <strong>Demo Mode:</strong> You are logged in as a demo user. Actions will not affect real data.
+            </div>
+        }
     </header>
-    <div class="container">
+    <div class="container position-relative">
+        <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - MedFormPro
+    <footer class="border-top footer text-muted bg-light mt-5 py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span>&copy; 2024 - MedFormPro</span>
+            <a href="/Guide" class="text-secondary"><i class="fa fa-book-open me-1"></i>Guides & Help</a>
         </div>
     </footer>
-
     <partial name="_GuideButton" />
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const toastId = 'toast-' + Date.now();
+            const bg = type === 'success' ? 'bg-success' : type === 'error' ? 'bg-danger' : 'bg-info';
+            const html = `<div id="${toastId}" class="toast align-items-center text-white ${bg} border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>`;
+            $('#toast-container').append(html);
+            const toastEl = new bootstrap.Toast(document.getElementById(toastId), { delay: 4000 });
+            toastEl.show();
+            setTimeout(() => { $('#' + toastId).remove(); }, 4500);
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

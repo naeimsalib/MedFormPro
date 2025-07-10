@@ -13,7 +13,7 @@ namespace MedFormPro.Web.Controllers
             _context = context;
         }
 
-        protected override void OnActionExecuting(ActionExecutingContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (User.Identity.IsAuthenticated)
             {

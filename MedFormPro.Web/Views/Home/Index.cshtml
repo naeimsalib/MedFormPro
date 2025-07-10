@@ -1,44 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-
-<div class="container">
-    <div class="text-center my-5">
-        <h1 class="display-4 mb-4">Welcome to MedFormPro</h1>
-        <p class="lead mb-5">A comprehensive prescription management system for pharmacies</p>
-        
-        @if (User.Identity?.IsAuthenticated == true)
-        {
-            <p>Hello, @ViewData["FullName"]!</p>
-            @if (User.Identity.Name == "pharmacist_demo" || User.Identity.Name == "reviewer_demo" || User.Identity.Name == "delivery_demo")
-            {
-                <div class="mb-4">
-                    <form asp-controller="Account" asp-action="DemoLogin" method="post" style="display:inline;">
-                        <input type="hidden" name="role" value="Pharmacist" />
-                        <button type="submit" class="btn btn-outline-primary mx-1">Switch to Pharmacist Demo</button>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0 mb-4">
+            <div class="card-body text-center py-5">
+                <h1 class="display-5 fw-bold mb-3"><i class="fa fa-prescription-bottle-alt text-primary me-2"></i>Welcome to MedFormPro</h1>
+                <p class="lead mb-4">A modern platform for managing prescriptions, reviews, and deliveries in a secure, collaborative environment.</p>
+                <hr class="my-4" />
+                <h4 class="mb-3">Try the Demo</h4>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <form id="demo-pharmacist" asp-controller="Account" asp-action="Login" method="post">
+                        <input type="hidden" name="Email" value="pharmacist1@medformpro.com" />
+                        <input type="hidden" name="Password" value="pharmacist123!" />
+                        <input type="hidden" name="RememberMe" value="false" />
+                        <button type="submit" class="btn btn-outline-primary btn-lg px-4"><i class="fa fa-mortar-pestle me-2"></i>Demo as Pharmacist</button>
                     </form>
-                    <form asp-controller="Account" asp-action="DemoLogin" method="post" style="display:inline;">
-                        <input type="hidden" name="role" value="Reviewer" />
-                        <button type="submit" class="btn btn-outline-success mx-1">Switch to Reviewer Demo</button>
+                    <form id="demo-reviewer" asp-controller="Account" asp-action="Login" method="post">
+                        <input type="hidden" name="Email" value="reviewer1@medformpro.com" />
+                        <input type="hidden" name="Password" value="reviewer123!" />
+                        <input type="hidden" name="RememberMe" value="false" />
+                        <button type="submit" class="btn btn-outline-success btn-lg px-4"><i class="fa fa-user-check me-2"></i>Demo as Reviewer</button>
                     </form>
-                    <form asp-controller="Account" asp-action="DemoLogin" method="post" style="display:inline;">
-                        <input type="hidden" name="role" value="Delivery" />
-                        <button type="submit" class="btn btn-outline-warning mx-1">Switch to Delivery Demo</button>
+                    <form id="demo-delivery" asp-controller="Account" asp-action="Login" method="post">
+                        <input type="hidden" name="Email" value="delivery1@medformpro.com" />
+                        <input type="hidden" name="Password" value="delivery123!" />
+                        <input type="hidden" name="RememberMe" value="false" />
+                        <button type="submit" class="btn btn-outline-warning btn-lg px-4 text-dark"><i class="fa fa-truck me-2"></i>Demo as Delivery</button>
                     </form>
                 </div>
-            }
-        }
-        else
-        {
-            <div class="mb-4">
-                <form asp-controller="Account" asp-action="DemoLogin" method="post">
-                    <input type="hidden" name="role" value="Pharmacist" />
-                    <button type="submit" class="btn btn-info btn-lg px-4">Demo as Pharmacist</button>
-                </form>
             </div>
-        }
+        </div>
     </div>
+</div>
 
+<div class="container">
     <div class="row g-4 py-5">
         <div class="col-md-4">
             <div class="card h-100 shadow-sm">

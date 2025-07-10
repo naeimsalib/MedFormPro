@@ -13,17 +13,22 @@ namespace MedFormPro.Web.Controllers
             _context = context;
         }
 
-        public override void OnActionExecuting(ActionExecutingContext context)
+        protected override void OnActionExecuting(ActionExecutingContext context)
         {
-            base.OnActionExecuting(context);
-            if (User.Identity?.IsAuthenticated == true)
+            if (User.Identity.IsAuthenticated)
             {
-                var user = _context.Users.FirstOrDefault(u => u.Username == User.Identity.Name);
+                var username = User.Identity.Name;
+                var user = _context.Users.FirstOrDefault(u => u.Username == username);
                 if (user != null)
                 {
                     ViewData["FullName"] = user.FirstName + " " + user.LastName;
                 }
+                else
+                {
+                    ViewData["FullName"] = username;
+                }
             }
+            base.OnActionExecuting(context);
         }
     }
 } 

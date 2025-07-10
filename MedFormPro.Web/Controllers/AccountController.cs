@@ -257,5 +257,47 @@ namespace MedFormPro.Web.Controllers
             TempData["SuccessMessage"] = "User deleted successfully.";
             return RedirectToAction(nameof(ManageUsers));
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> DemoLogin(string role)
+        {
+            string demoUsername = role switch
+            {
+                "Pharmacist" => "pharmacist_demo",
+                "Reviewer" => "reviewer_demo",
+                "Delivery" => "delivery_demo",
+                _ => null
+            };
+            if (demoUsername == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == demoUsername);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = $"Demo user for {role} not found.";
+                return RedirectToAction("Login");
+            }
+            if (string.IsNullOrEmpty(user.PasswordHash))
+            {
+                var hasher = new PasswordHasher<User>();
+                user.PasswordHash = hasher.HashPassword(user, "demo1234");
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                new AuthenticationProperties { IsPersistent = false });
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

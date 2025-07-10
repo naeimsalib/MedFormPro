@@ -9,12 +9,32 @@
         
         @if (User.Identity?.IsAuthenticated == true)
         {
-            <p>Hello, @User.Identity.Name!</p>
+            <p>Hello, @ViewData["FullName"]!</p>
+            @if (User.Identity.Name == "pharmacist_demo" || User.Identity.Name == "reviewer_demo" || User.Identity.Name == "delivery_demo")
+            {
+                <div class="mb-4">
+                    <form asp-controller="Account" asp-action="DemoLogin" method="post" style="display:inline;">
+                        <input type="hidden" name="role" value="Pharmacist" />
+                        <button type="submit" class="btn btn-outline-primary mx-1">Switch to Pharmacist Demo</button>
+                    </form>
+                    <form asp-controller="Account" asp-action="DemoLogin" method="post" style="display:inline;">
+                        <input type="hidden" name="role" value="Reviewer" />
+                        <button type="submit" class="btn btn-outline-success mx-1">Switch to Reviewer Demo</button>
+                    </form>
+                    <form asp-controller="Account" asp-action="DemoLogin" method="post" style="display:inline;">
+                        <input type="hidden" name="role" value="Delivery" />
+                        <button type="submit" class="btn btn-outline-warning mx-1">Switch to Delivery Demo</button>
+                    </form>
+                </div>
+            }
         }
         else
         {
             <div class="mb-4">
-                <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg px-4">Login to System</a>
+                <form asp-controller="Account" asp-action="DemoLogin" method="post">
+                    <input type="hidden" name="role" value="Pharmacist" />
+                    <button type="submit" class="btn btn-info btn-lg px-4">Demo as Pharmacist</button>
+                </form>
             </div>
         }
     </div>
